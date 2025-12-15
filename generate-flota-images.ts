@@ -36,3 +36,4 @@ ${imagePaths}
   process.exit(1);
 }
 
+

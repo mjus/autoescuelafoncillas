@@ -22,3 +22,4 @@ Para que las imágenes se muestren correctamente en la página "Nosotros", guard
 
 Si las imágenes no están disponibles, se mostrarán placeholders con iconos automáticamente.
 
+

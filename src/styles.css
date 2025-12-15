@@ -60,7 +60,7 @@ body {
 }
 
 main {
-    padding-top: 150px;
+    padding-top: 120px; /* Reducido porque navbar fue eliminado */
 }
 
 .container {
@@ -91,20 +91,29 @@ main {
     background: var(--secondary-color);
     padding: 10px 0;
     color: var(--white);
+    position: relative;
 }
 
 .header-top .container {
+    position: relative;
+}
+
+.header-top-row {
     display: flex;
     justify-content: space-between;
     align-items: center;
     flex-wrap: wrap;
-    gap: 15px;
+    gap: 20px;
+    width: 100%;
 }
 
 .header-contact {
     display: flex;
-    gap: 25px;
+    gap: 20px;
     flex-wrap: wrap;
+    align-items: center;
+    flex: 1;
+    justify-content: center;
 }
 
 .contact-link {
@@ -145,19 +154,15 @@ main {
     box-shadow: var(--shadow-md);
 }
 
-.navbar {
-    padding: 15px 0;
-    background: var(--white);
-    min-height: 100px;
-    display: flex;
-    align-items: center;
-}
+/* Navbar eliminado - nav-wrapper ahora está en header-top */
 
 .nav-wrapper {
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    width: 100%;
+    justify-content: flex-end;
+    gap: 20px;
+    position: relative;
+    flex-shrink: 0;
 }
 
 .nav-wrapper .logo {
@@ -182,6 +187,33 @@ main {
 
 .logo-image {
     height: 50px;
+    width: auto;
+    object-fit: contain;
+}
+
+.logo-fixed {
+    position: fixed;
+    top: 15px;
+    left: 15px;
+    z-index: 10000;
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    background: rgba(255, 255, 255, 0.95);
+    padding: 8px 12px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    transition: all var(--transition-normal);
+}
+
+.logo-fixed:hover {
+    background: var(--white);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+    transform: translateY(-2px);
+}
+
+.logo-fixed .logo-image {
+    height: 45px;
     width: auto;
     object-fit: contain;
 }
@@ -212,7 +244,7 @@ main {
 }
 
 .nav-menu {
-    display: flex;
+    display: none; /* Oculto por defecto */
     list-style: none;
     gap: 15px;
     align-items: center;
@@ -220,6 +252,90 @@ main {
     justify-content: space-between;
     margin-left: 30px;
     padding: 0 20px;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity var(--transition-normal), visibility var(--transition-normal);
+}
+
+/* En desktop: mostrar menú en hover del nav-wrapper o del menú mismo */
+@media (min-width: 769px) {
+    .nav-wrapper {
+        position: relative;
+    }
+    
+    .nav-menu {
+        position: absolute;
+        top: calc(100% + 10px);
+        left: 0;
+        background: var(--white);
+        box-shadow: var(--shadow-lg);
+        z-index: 999;
+        border-radius: 10px;
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 15px;
+        margin-left: 0;
+        margin-top: 0;
+        min-width: 220px;
+        max-width: 300px;
+        white-space: nowrap;
+    }
+    
+    .nav-menu li {
+        width: 100%;
+    }
+    
+    /* Puente invisible para mantener el hover activo */
+    .nav-menu::before {
+        content: '';
+        position: absolute;
+        top: -15px;
+        left: 0;
+        right: 0;
+        height: 15px;
+        background: transparent;
+    }
+    
+    /* Mostrar menú cuando se hace hover sobre el botón, nav-wrapper o el menú */
+    .menu-toggle:hover ~ .nav-menu,
+    .nav-wrapper:hover .nav-menu,
+    .nav-menu:hover {
+        display: flex;
+        opacity: 1;
+        visibility: visible;
+    }
+    
+    /* Asegurar que el menú se mantenga visible cuando el mouse está sobre él o sus elementos */
+    .nav-menu:hover,
+    .nav-menu li:hover,
+    .nav-menu a:hover {
+        display: flex;
+        opacity: 1;
+        visibility: visible;
+    }
+    
+    /* Asegurar que el menú se mantenga visible cuando el mouse está sobre él */
+    .nav-menu::before {
+        content: '';
+        position: absolute;
+        top: -10px;
+        left: 0;
+        right: 0;
+        height: 10px;
+        background: transparent;
+    }
+    
+    /* Hacer que el área de hover incluya el espacio entre el botón y el menú */
+    .nav-wrapper::after {
+        content: '';
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        height: 10px;
+        background: transparent;
+        z-index: 998;
+    }
 }
 
 .nav-menu li {
@@ -283,21 +399,40 @@ main {
 
 
 .menu-toggle {
-    display: none;
+    display: flex; /* Visible siempre */
     flex-direction: column;
     gap: 5px;
     background: none;
     border: none;
     cursor: pointer;
     padding: 5px;
+    position: relative;
+    z-index: 1000;
 }
 
 .menu-toggle span {
     width: 25px;
     height: 3px;
-    background: var(--dark);
+    background: var(--white);
     border-radius: 3px;
     transition: all var(--transition-fast);
+}
+
+/* Mostrar menú en hover del botón hamburger o del nav-wrapper */
+.nav-wrapper:hover .nav-menu {
+    display: flex;
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Mantener visible cuando el menú está activo (click) */
+/* Estilos para menú activo - solo desktop */
+@media (min-width: 769px) {
+    .nav-menu.active {
+        display: flex !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+    }
 }
 
 /* ============================================
@@ -1064,7 +1199,7 @@ section {
     
     .nav-menu {
         position: fixed;
-        top: 150px;
+        top: 100px;
         left: 0;
         right: 0;
         width: 100%;
@@ -1077,18 +1212,28 @@ section {
         visibility: hidden;
         transition: all var(--transition-normal);
         z-index: 9999;
-        max-height: calc(100vh - 150px);
-        overflow-y: auto;
+        max-height: none;
+        overflow-y: visible;
         margin-left: 0;
         gap: 0;
+        display: flex;
     }
     
     .nav-menu li {
-        flex: 0 1 auto;
+        flex: 0 0 auto;
         width: 100%;
         text-align: left;
-        padding: 10px 0;
+        padding: 12px 0;
         border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        display: block;
+        min-height: 44px;
+        line-height: 1.5;
+    }
+    
+    .nav-menu li a {
+        display: block;
+        width: 100%;
+        padding: 8px 0;
     }
     
     .nav-menu li:last-child {
@@ -1096,9 +1241,12 @@ section {
     }
     
     .nav-menu.active {
-        transform: translateY(0);
-        opacity: 1;
-        visibility: visible;
+        transform: translateY(0) !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+        display: flex !important;
+        max-height: calc(100vh - 100px);
+        overflow-y: auto;
     }
     
     .hero {
@@ -1362,6 +1510,49 @@ app-home .page-hero {
 .page-hero .container {
     position: relative;
     z-index: 2;
+}
+
+.logo-page-hero {
+    position: absolute;
+    top: 40px;
+    left: 20px;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    background: rgba(255, 255, 255, 0.95);
+    padding: 10px 15px;
+    border-radius: 10px;
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.15);
+    transition: all var(--transition-normal);
+}
+
+.logo-page-hero:hover {
+    background: var(--white);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    transform: translateY(-2px);
+}
+
+.logo-page-hero .logo-image {
+    height: 50px;
+    width: auto;
+    object-fit: contain;
+}
+
+@media (max-width: 768px) {
+    .logo-page-hero {
+        top: 40px;
+        left: 15px;
+        padding: 8px 12px;
+    }
+    
+    .logo-page-hero:hover {
+        transform: translateY(-2px);
+    }
+    
+    .logo-page-hero .logo-image {
+        height: 40px;
+    }
 }
 
 .page-hero h1 {

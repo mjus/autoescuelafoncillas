@@ -62,3 +62,4 @@ ${imagePaths.join(',\n')}
   process.exit(1);
 }
 
+
