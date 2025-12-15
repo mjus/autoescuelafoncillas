@@ -272,7 +272,7 @@ main {
         z-index: 999;
         border-radius: 10px;
         flex-direction: column;
-        align-items: flex-start;
+        align-items: center;
         padding: 15px;
         margin-left: 0;
         margin-top: 0;
@@ -306,9 +306,7 @@ main {
     }
     
     /* Asegurar que el menú se mantenga visible cuando el mouse está sobre él o sus elementos */
-    .nav-menu:hover,
-    .nav-menu li:hover,
-    .nav-menu a:hover {
+    .nav-menu:hover {
         display: flex;
         opacity: 1;
         visibility: visible;
@@ -342,6 +340,7 @@ main {
     flex: 0 1 auto;
     text-align: center;
     white-space: nowrap;
+    position: relative;
 }
 
 .nav-menu a {
@@ -349,10 +348,12 @@ main {
     text-decoration: none;
     font-weight: 500;
     position: relative;
-    transition: all var(--transition-fast);
+    transition: color var(--transition-fast);
     padding: 5px 0;
     white-space: nowrap;
-    display: inline-block;
+    display: block;
+    width: 100%;
+    text-align: center;
 }
 
 .nav-menu a::after {
@@ -1246,12 +1247,13 @@ section {
         margin-left: 0;
         gap: 0;
         display: flex;
+        touch-action: pan-y; /* Permitir scroll vertical y detectar swipe */
     }
     
     .nav-menu li {
         flex: 0 0 auto;
         width: 100%;
-        text-align: left;
+        text-align: center;
         padding: 12px 0;
         border-bottom: 1px solid rgba(0, 0, 0, 0.1);
         display: block;
@@ -1263,6 +1265,7 @@ section {
         display: block;
         width: 100%;
         padding: 8px 0;
+        text-align: center;
     }
     
     .nav-menu li.menu-logo-item {

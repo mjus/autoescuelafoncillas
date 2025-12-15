@@ -12,7 +12,12 @@
                         <span></span>
                         <span></span>
                     </button>
-                    <ul class="nav-menu" [class.active]="isMenuOpen" id="navMenu">
+                    <ul class="nav-menu" 
+                        [class.active]="isMenuOpen" 
+                        id="navMenu"
+                        (touchstart)="onTouchStart($event)"
+                        (touchmove)="onTouchMove($event)"
+                        (touchend)="onTouchEnd($event)">
                         <li class="menu-logo-item">
                             <a routerLink="/" routerLinkActive="active" (click)="closeMenu()" class="menu-logo-link-main">
                                 <img src="assets/img/logo_nuevo.png" alt="Autoescuela Foncillas" class="menu-main-logo">
