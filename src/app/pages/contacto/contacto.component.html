@@ -1,0 +1,66 @@
+<section class="page-hero">
+    <div class="container">
+        <h1>Contacto</h1>
+        <p>Estamos aquí para ayudarte</p>
+    </div>
+</section>
+
+<section class="contact-section-page">
+    <div class="container">
+        <div class="contact-wrapper">
+            <div class="contact-info-side">
+                <h2>Información de Contacto</h2>
+                <div class="contact-card-page">
+                    <div class="contact-icon-page">📍</div>
+                    <h3>Dirección</h3>
+                    <p>C/ Nueva 8, Oficina 1<br>Polígono Industrial de Mutilva Alta<br>31192 Mutilva</p>
+                </div>
+                <div class="contact-card-page">
+                    <div class="contact-icon-page">📞</div>
+                    <h3>Teléfonos</h3>
+                    <p>
+                        <a href="tel:948858314">948 85 83 14</a><br>
+                        <a href="tel:675731062">675 73 10 62</a>
+                    </p>
+                </div>
+                <div class="contact-card-page">
+                    <div class="contact-icon-page">✉️</div>
+                    <h3>Email</h3>
+                    <p><a href="mailto:autoescuelafoncillas&#64;gmail.com">autoescuelafoncillas&#64;gmail.com</a></p>
+                </div>
+                <div class="contact-card-page">
+                    <div class="contact-icon-page">🕒</div>
+                    <h3>Horario</h3>
+                    <p>Lunes - Viernes: 9:00 - 20:00<br>Sábados: 9:00 - 14:00</p>
+                </div>
+            </div>
+            <div class="contact-form-side">
+                <h2>Envíanos un Mensaje</h2>
+                <form class="contact-form" #contactForm="ngForm" (ngSubmit)="onSubmit(contactForm)">
+                    <div class="form-group">
+                        <label for="contact-nombre">Nombre completo *</label>
+                        <input type="text" id="contact-nombre" name="nombre" ngModel required>
+                    </div>
+                    <div class="form-group">
+                        <label for="contact-email">Email *</label>
+                        <input type="email" id="contact-email" name="email" ngModel required>
+                    </div>
+                    <div class="form-group">
+                        <label for="contact-telefono">Teléfono</label>
+                        <input type="tel" id="contact-telefono" name="telefono" ngModel>
+                    </div>
+                    <div class="form-group">
+                        <label for="contact-asunto">Asunto *</label>
+                        <input type="text" id="contact-asunto" name="asunto" ngModel required>
+                    </div>
+                    <div class="form-group">
+                        <label for="contact-mensaje">Mensaje *</label>
+                        <textarea id="contact-mensaje" name="mensaje" rows="6" ngModel required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-large">Enviar Mensaje</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+

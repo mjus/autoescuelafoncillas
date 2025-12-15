@@ -1,0 +1,283 @@
+<section class="page-hero">
+    <div class="container">
+        <h1 class="hero-title-modern">
+            Tu libertad sobre ruedas<br>
+            <span class="gradient-text">comienza aquí</span>
+        </h1>
+        <p class="hero-subtitle-nosotros">Tu autoescuela de confianza en Mutilva</p>
+        <p class="hero-description-nosotros">Somos una empresa familiar dedicada a la enseñanza de la conducción de todos los permisos desde hace <strong>más de 70 años</strong>.</p>
+    </div>
+</section>
+
+<section class="about-content-section">
+    <div class="container">
+
+        <!-- Imágenes de la autoescuela -->
+        <div class="about-images-grid">
+            <div class="about-image-card" data-aos="fade-up" data-aos-delay="0">
+                <div class="image-placeholder">
+                    <img src="assets/img/nosotros-1.jpg" 
+                         alt="Instalaciones Autoescuela Foncillas" 
+                         (error)="onImageError($event)">
+                    <div class="placeholder-content">
+                        <div class="placeholder-icon">🏢</div>
+                        <p>Instalaciones</p>
+                    </div>
+                </div>
+                <h3>Nuestras Instalaciones</h3>
+                <p>Oficina moderna en el Polígono Industrial de Mutilva Alta</p>
+            </div>
+            <div class="about-image-card" data-aos="fade-up" data-aos-delay="100">
+                <div class="image-placeholder">
+                    <img src="assets/img/nosotros-2.jpg" 
+                         alt="Pista de aprendizaje" 
+                         (error)="onImageError($event)">
+                    <div class="placeholder-content">
+                        <div class="placeholder-icon">🏁</div>
+                        <p>Pista Propia</p>
+                    </div>
+                </div>
+                <h3>Pistas de Aprendizaje</h3>
+                <p>Pistas propias para permisos de moto y carnés profesionales</p>
+            </div>
+            <div class="about-image-card" data-aos="fade-up" data-aos-delay="200">
+                <div class="image-placeholder">
+                    <div class="flota-slider">
+                        <div class="slider-container" [style.transform]="'translateX(-' + (currentFlotaSlide * (100 / flotaSlides)) + '%)'" [style.width]="(flotaSlides * 100) + '%'">
+                            <div class="slider-slide" *ngFor="let image of flotaImages; let i = index" [style.width]="(100 / flotaSlides) + '%'">
+                                <img [src]="image" 
+                                     [alt]="'Vehículo ' + (i + 1) + ' de la autoescuela'" 
+                                     (error)="onImageError($event)"
+                                     loading="eager">
+                            </div>
+                        </div>
+                        <button class="slider-btn slider-btn-prev" (click)="prevFlotaSlide()" aria-label="Imagen anterior">‹</button>
+                        <button class="slider-btn slider-btn-next" (click)="nextFlotaSlide()" aria-label="Siguiente imagen">›</button>
+                        <div class="slider-dots">
+                            <span class="dot" 
+                                  *ngFor="let image of flotaImages; let i = index"
+                                  [class.active]="currentFlotaSlide === i" 
+                                  (click)="goToFlotaSlide(i)"></span>
+                        </div>
+                    </div>
+                    <div class="placeholder-content">
+                        <div class="placeholder-icon">🚗</div>
+                        <p>18 Vehículos</p>
+                    </div>
+                </div>
+                <h3>Nuestra Flota</h3>
+                <p>18 vehículos a disposición para todos los tipos de permisos</p>
+            </div>
+        </div>
+
+        <div class="about-details-grid">
+            <div class="about-details-text">
+                <div class="detail-section">
+                    <div class="detail-icon">🚗</div>
+                    <h2>Nuestros Recursos</h2>
+                    <p>Tenemos <strong>18 vehículos</strong> a disposición y <strong>pistas de aprendizaje propias</strong> para permisos de moto o carnés profesionales.</p>
+                </div>
+
+                <div class="detail-section">
+                    <div class="detail-icon">📜</div>
+                    <h2>Permisos que Preparamos</h2>
+                    <p>Os podemos preparar para <strong>9 tipos de permisos</strong>:</p>
+                    <ul class="permits-list">
+                        <li><a routerLink="/permiso/A"><strong>A</strong> - Motocicletas sin limitación</a></li>
+                        <li><a routerLink="/permiso/Am"><strong>Am</strong> - Ciclomotor manual o automático</a></li>
+                        <li><a routerLink="/permiso/A1"><strong>A1</strong> - Motocicletas hasta 125cc manual o automático</a></li>
+                        <li><a routerLink="/permiso/A2"><strong>A2</strong> - Motocicletas hasta 35kW</a></li>
+                        <li><a routerLink="/permiso/B"><strong>B</strong> - Turismos manual o automático</a></li>
+                        <li><a routerLink="/permiso/B%E"><strong>B+E</strong> - Turismos con remolque</a></li>
+                        <li><a routerLink="/permiso/C"><strong>C</strong> - Camiones</a></li>
+                        <li><a routerLink="/permiso/C%E"><strong>C+E</strong> - Camiones con remolque y trailer</a></li>
+                        <li><a routerLink="/permiso/D"><strong>D</strong> - Autobuses</a></li>
+                    </ul>
+                </div>
+
+                <div class="detail-section">
+                    <div class="detail-icon">🎓</div>
+                    <h2>Cursos Especializados</h2>
+                    <p>Organizamos también:</p>
+                    <ul class="courses-list">
+                        <li>✓ Cursos <a routerLink="/cap"><strong>CAP</strong></a> (Certificado de Aptitud Profesional)</li>
+                        <li>✓ Clases de <strong>conducción eficiente</strong></li>
+                        <li>✓ Clases para personas que tienen <strong>miedo a conducir</strong> (Amaxofobia)</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="about-features-sidebar">
+                <div class="feature-box-modern">
+                    <div class="feature-icon-large">🏆</div>
+                    <h3>70+ Años</h3>
+                    <p>De experiencia formando conductores</p>
+                </div>
+                <div class="feature-box-modern">
+                    <div class="feature-icon-large">🚗</div>
+                    <h3>18 Vehículos</h3>
+                    <p>Flota completa y actualizada</p>
+                </div>
+                <div class="feature-box-modern">
+                    <div class="feature-icon-large">🏁</div>
+                    <h3>Pistas Propias</h3>
+                    <p>Instalaciones exclusivas en Mutilva</p>
+                </div>
+                <div class="feature-box-modern">
+                    <div class="feature-icon-large">👨‍👩‍👧‍👦</div>
+                    <h3>Empresa Familiar</h3>
+                    <p>Tradición y compromiso desde 1955</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Why Choose Us Section -->
+<section class="why-section">
+    <div class="container">
+        <div class="section-header-modern">
+            <span class="section-badge">¿Por qué elegirnos?</span>
+            <h2 class="section-title-modern">La mejor formación<br>para tu futuro</h2>
+        </div>
+        <div class="why-grid">
+            <div class="why-card" data-aos="fade-up" data-aos-delay="0">
+                <div class="why-icon-wrapper">
+                    <div class="why-icon">🎓</div>
+                </div>
+                <h3>Método Probado</h3>
+                <p>Sistema de enseñanza con resultados comprobados y alta efectividad.</p>
+            </div>
+            <div class="why-card" data-aos="fade-up" data-aos-delay="100">
+                <div class="why-icon-wrapper">
+                    <div class="why-icon">👨‍🏫</div>
+                </div>
+                <h3>Profesores Expertos</h3>
+                <p>Instructores altamente cualificados con años de experiencia y paciencia infinita.</p>
+            </div>
+            <div class="why-card" data-aos="fade-up" data-aos-delay="200">
+                <div class="why-icon-wrapper">
+                    <div class="why-icon">🚗</div>
+                </div>
+                <h3>Vehículos Modernos</h3>
+                <p>Flota actualizada con los últimos modelos, manuales y automáticos.</p>
+            </div>
+            <div class="why-card" data-aos="fade-up" data-aos-delay="300">
+                <div class="why-icon-wrapper">
+                    <div class="why-icon">🏁</div>
+                </div>
+                <h3>Pista Propia</h3>
+                <p>Instalaciones exclusivas en Mutilva para practicar en un entorno seguro.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Special Courses -->
+<section class="special-courses">
+    <div class="container">
+        <div class="section-header-modern">
+            <span class="section-badge">Cursos Especiales</span>
+            <h2 class="section-title-modern">Programas únicos<br>para necesidades específicas</h2>
+        </div>
+        <div class="special-courses-grid">
+            <div class="special-course-card" data-aos="fade-up" data-aos-delay="0">
+                <div class="course-number">01</div>
+                <div class="course-icon-large">🅿️</div>
+                <h3>Aprende a Estacionar</h3>
+                <p class="course-description">2 clases de 45 minutos en nuestra pista de Mutilva. Domina el estacionamiento en batería, en línea y marcha atrás.</p>
+                <div class="course-highlight">
+                    <span class="highlight-label">Pista propia</span>
+                </div>
+                <a routerLink="/matricula" class="course-cta">Reservar →</a>
+            </div>
+            <div class="special-course-card" data-aos="fade-up" data-aos-delay="100">
+                <div class="course-number">02</div>
+                <div class="course-icon-large">😌</div>
+                <h3>Supera el Miedo a Conducir</h3>
+                <p class="course-description">Programa especializado de amaxofobia: 8 clases de 45 minutos con enfoque terapéutico y profesional.</p>
+                <div class="course-highlight">
+                    <span class="highlight-price">360€</span>
+                    <span class="highlight-label">Manual o automático</span>
+                </div>
+                <a routerLink="/matricula" class="course-cta">Reservar →</a>
+            </div>
+            <div class="special-course-card" data-aos="fade-up" data-aos-delay="200">
+                <div class="course-number">03</div>
+                <div class="course-icon-large">⚡</div>
+                <h3>Conducción Eficiente</h3>
+                <p class="course-description">Aprende técnicas avanzadas para ahorrar combustible y reducir emisiones. 2 clases de 1 hora.</p>
+                <div class="course-highlight">
+                    <span class="highlight-price">120€</span>
+                    <span class="highlight-label">Ahorro garantizado</span>
+                </div>
+                <a routerLink="/matricula" class="course-cta">Reservar →</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="cta-section">
+    <div class="container">
+        <div class="cta-content">
+            <h2>¿Listo para empezar tu formación?</h2>
+            <p>Únete a miles de alumnos que han confiado en nosotros durante más de 70 años</p>
+            <a routerLink="/matricula" class="btn btn-primary btn-large pulse-animation">
+                Matricúlate Ahora
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- Testimonials Modern -->
+<section class="testimonials-modern">
+    <div class="container">
+        <div class="section-header-modern">
+            <span class="section-badge">Testimonios</span>
+            <h2 class="section-title-modern">Lo que dicen<br>nuestros alumnos</h2>
+        </div>
+        <div class="testimonials-modern-slider">
+            <div class="testimonial-modern-card active">
+                <div class="testimonial-quote">"</div>
+                <div class="testimonial-stars-modern">★★★★★</div>
+                <p class="testimonial-text-modern">Excelente autoescuela, profesores muy profesionales y pacientes. Aprobé a la primera gracias a su método de enseñanza.</p>
+                <div class="testimonial-author-modern">
+                    <div class="author-avatar-modern">M</div>
+                    <div class="author-info-modern">
+                        <div class="author-name-modern">María González</div>
+                        <div class="author-course-modern">Permiso B</div>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-modern-card">
+                <div class="testimonial-quote">"</div>
+                <div class="testimonial-stars-modern">★★★★★</div>
+                <p class="testimonial-text-modern">El curso CAP fue muy completo y los instructores tienen mucha experiencia. Totalmente recomendable.</p>
+                <div class="testimonial-author-modern">
+                    <div class="author-avatar-modern">J</div>
+                    <div class="author-info-modern">
+                        <div class="author-name-modern">Juan Pérez</div>
+                        <div class="author-course-modern">CAP Mercancías</div>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-modern-card">
+                <div class="testimonial-quote">"</div>
+                <div class="testimonial-stars-modern">★★★★★</div>
+                <p class="testimonial-text-modern">Superé mi miedo a conducir gracias al curso de amaxofobia. Los profesores son muy comprensivos y profesionales.</p>
+                <div class="testimonial-author-modern">
+                    <div class="author-avatar-modern">A</div>
+                    <div class="author-info-modern">
+                        <div class="author-name-modern">Ana Martínez</div>
+                        <div class="author-course-modern">Amaxofobia</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="testimonials-dots-modern">
+            <span class="dot-modern active" data-slide="0"></span>
+            <span class="dot-modern" data-slide="1"></span>
+            <span class="dot-modern" data-slide="2"></span>
+        </div>
+    </div>
+</section>

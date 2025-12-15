@@ -1,0 +1,113 @@
+<section class="matricula-hero">
+    <div class="container">
+        <div class="matricula-header">
+            <h1>¡Matricúlate Online!</h1>
+            <p>Reserva tu curso ahora. Posibilidad de pago online para los cursos CAP y Permiso A.</p>
+        </div>
+    </div>
+</section>
+
+<section class="matricula-section">
+    <div class="container">
+        <div class="matricula-wrapper">
+            <div class="matricula-form-container">
+                <form class="matricula-form" #matriculaForm="ngForm" (ngSubmit)="onSubmit(matriculaForm)">
+                    <h2>Datos Personales</h2>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="nombre">Nombre completo *</label>
+                            <input type="text" id="nombre" name="nombre" ngModel required>
+                        </div>
+                        <div class="form-group">
+                            <label for="dni">DNI/NIE *</label>
+                            <input type="text" id="dni" name="dni" ngModel required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="email">Email *</label>
+                            <input type="email" id="email" name="email" ngModel required>
+                        </div>
+                        <div class="form-group">
+                            <label for="telefono">Teléfono *</label>
+                            <input type="tel" id="telefono" name="telefono" ngModel required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="direccion">Dirección</label>
+                        <input type="text" id="direccion" name="direccion" ngModel>
+                    </div>
+                    <h2>Curso de Interés</h2>
+                    <div class="form-group">
+                        <label for="curso">Selecciona el curso *</label>
+                        <select id="curso" name="curso" ngModel required>
+                            <option value="">Selecciona un curso</option>
+                            <optgroup label="CAP">
+                                <option value="cap-mercancias">CAP Mercancías</option>
+                                <option value="cap-viajeros">CAP Viajeros</option>
+                            </optgroup>
+                            <optgroup label="Carnés Profesionales">
+                                <option value="permiso-c">Permiso C</option>
+                                <option value="permiso-d">Permiso D</option>
+                                <option value="permiso-ce">Permiso C+E</option>
+                                <option value="permiso-be">Permiso B+E</option>
+                            </optgroup>
+                            <optgroup label="Permisos Moto y Turismo">
+                                <option value="permiso-am">Permiso AM</option>
+                                <option value="permiso-a1">Permiso A1</option>
+                                <option value="permiso-a2">Permiso A2</option>
+                                <option value="permiso-a">Permiso A</option>
+                                <option value="permiso-b">Permiso B</option>
+                            </optgroup>
+                            <optgroup label="Otros Servicios">
+                                <option value="estacionar">Aprende a estacionar</option>
+                                <option value="amaxofobia">Miedo a conducir (Amaxofobia)</option>
+                                <option value="eficiente">Conducción eficiente</option>
+                                <option value="reciclaje">Clases de reciclaje</option>
+                            </optgroup>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="mensaje">Mensaje adicional (opcional)</label>
+                        <textarea id="mensaje" name="mensaje" rows="4" placeholder="Cuéntanos tus necesidades o preguntas..." ngModel></textarea>
+                    </div>
+                    <div class="form-group checkbox-group">
+                        <label>
+                            <input type="checkbox" ngModel required>
+                            <span>Acepto la <a routerLink="/privacidad">Política de Privacidad</a> y el <a routerLink="/aviso-legal">Aviso Legal</a> *</span>
+                        </label>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-large">
+                        Enviar Solicitud de Matrícula
+                    </button>
+                </form>
+            </div>
+            <div class="matricula-info">
+                <div class="info-card">
+                    <h3>¿Por qué elegirnos?</h3>
+                    <ul>
+                            <li>✓ Más de 70 años de experiencia</li>
+                        <li>✓ Profesores altamente cualificados</li>
+                        <li>✓ Vehículos modernos y actualizados</li>
+                        <li>✓ Pista propia en Mutilva</li>
+                        <li>✓ Alta tasa de aprobados</li>
+                        <li>✓ Horarios flexibles</li>
+                    </ul>
+                </div>
+                <div class="info-card">
+                    <h3>Información de Contacto</h3>
+                    <p><strong>Teléfonos:</strong><br>
+                    <a href="tel:948858314">948 85 83 14</a><br>
+                    <a href="tel:675731062">675 73 10 62</a></p>
+                    <p><strong>Email:</strong><br>
+                    <a href="mailto:autoescuelafoncillas&#64;gmail.com">autoescuelafoncillas&#64;gmail.com</a></p>
+                    <p><strong>Dirección:</strong><br>
+                    C/ Nueva 8, Oficina 1<br>
+                    Polígono Industrial de Mutilva Alta<br>
+                    31192 Mutilva</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+

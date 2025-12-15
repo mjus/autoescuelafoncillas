@@ -1,0 +1,89 @@
+<section class="page-hero" *ngIf="permitInfo">
+    <div class="container">
+        <h1>{{ permitInfo.name }}</h1>
+        <p>{{ permitInfo.fullName }}</p>
+    </div>
+</section>
+
+<section class="info-section" *ngIf="permitInfo">
+    <div class="container">
+        <div class="info-content">
+            <div class="permit-detail-header">
+                <div class="permit-icon-large">{{ permitInfo.icon }}</div>
+                <div class="permit-header-text">
+                    <h2>{{ permitInfo.name }} - {{ permitInfo.fullName }}</h2>
+                    <p class="permit-description">{{ permitInfo.description }}</p>
+                    <div class="transmission-badges" *ngIf="permitInfo.id === 'B'">
+                        <span class="badge badge-manual">Manual</span>
+                        <span class="badge badge-automatic">Automático</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Galería de imágenes dinámicas -->
+            <div class="permit-images-gallery" *ngIf="permitInfo.images && permitInfo.images.length > 0">
+                <h3>Nuestros Vehículos</h3>
+                <div class="images-grid">
+                    <div class="image-card" *ngFor="let image of permitInfo.images">
+                        <img [src]="image" 
+                             [alt]="permitInfo.name + ' - Vehículo de la autoescuela'"
+                             (error)="onImageError($event)"
+                             loading="eager"
+                             style="display: block; width: 100%; height: 250px; object-fit: cover;">
+                    </div>
+                </div>
+            </div>
+
+            <div class="permit-details-grid">
+                <div class="permit-detail-card">
+                    <div class="detail-card-icon">📅</div>
+                    <h3>Edad Mínima</h3>
+                    <p>{{ permitInfo.age }}</p>
+                </div>
+
+                <div class="permit-detail-card">
+                    <div class="detail-card-icon">📋</div>
+                    <h3>Requisitos</h3>
+                    <ul>
+                        <li *ngFor="let req of permitInfo.requirements">{{ req }}</li>
+                    </ul>
+                </div>
+
+                <div class="permit-detail-card">
+                    <div class="detail-card-icon">🚗</div>
+                    <h3>Vehículos que Autoriza</h3>
+                    <ul>
+                        <li *ngFor="let vehicle of permitInfo.vehicles">{{ vehicle }}</li>
+                    </ul>
+                </div>
+
+                <div class="permit-detail-card">
+                    <div class="detail-card-icon">📝</div>
+                    <h3>Exámenes</h3>
+                    <ul>
+                        <li *ngFor="let exam of permitInfo.exams">{{ exam }}</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="cta-box">
+                <h3>¿Quieres obtener el {{ permitInfo.name }}?</h3>
+                <p>Contacta con nosotros y te ayudaremos a prepararte para obtener tu permiso</p>
+                <div class="cta-buttons">
+                    <a routerLink="/matricula" class="btn btn-primary btn-large">Matricúlate Ahora</a>
+                    <a routerLink="/contacto" class="btn btn-secondary btn-large">Contacta con Nosotros</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="info-section" *ngIf="!permitInfo">
+    <div class="container">
+        <div class="info-content">
+            <h2>Permiso no encontrado</h2>
+            <p>El permiso que buscas no existe. Por favor, vuelve a la <a routerLink="/nosotros">página de permisos</a>.</p>
+        </div>
+    </div>
+</section>
+
