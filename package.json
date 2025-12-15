@@ -9,7 +9,7 @@
     "build:dev": "ng build --configuration development",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "generate-flota": "powershell -ExecutionPolicy Bypass -File generate-flota-images.ps1",
+    "generate-flota": "node generate-flota-images.js",
     "prestart": "npm run generate-flota",
     "prebuild": "npm run generate-flota",
     "prebuild:prod": "npm run generate-flota"
