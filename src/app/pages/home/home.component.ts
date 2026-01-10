@@ -1,7 +1,6 @@
-import { Component, AfterViewInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, AfterViewInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
-import { FLOTA_IMAGES } from '../nosotros/flota-images';
 
 @Component({
   selector: 'app-home',
@@ -10,35 +9,34 @@ import { FLOTA_IMAGES } from '../nosotros/flota-images';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
-export class HomeComponent implements AfterViewInit, OnDestroy {
-  currentFlotaSlide = 0;
-  // Las imágenes se cargan dinámicamente desde flota-images.ts
-  // que se genera automáticamente por el script generate-flota-images.ps1
-  flotaImages: string[] = FLOTA_IMAGES;
-  flotaSlideInterval: any;
+export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
   currentTestimonial = 0;
   testimonialInterval: any;
 
+  // Flota slider properties
+  flotaImages: string[] = [
+    'assets/img/flota/1000028958.jpg',
+    'assets/img/flota/1000028959.jpg',
+    'assets/img/flota/1000028960.jpg',
+    'assets/img/flota/autobus_nuevo.jpg',
+    'assets/img/flota/flota-1.jpeg',
+    'assets/img/flota/flota-2.jpeg',
+    'assets/img/flota/flota-3.jpeg',
+    'assets/img/flota/nosotros-3.jpg'
+  ];
+  currentFlotaSlide = 0;
   get flotaSlides(): number {
     return this.flotaImages.length;
   }
 
-  ngAfterViewInit() {
-    // Inicializar animaciones AOS
-    this.initializeAnimations();
-    // Iniciar auto-slide para la flota
-    this.startFlotaAutoSlide();
-    // Inicializar testimonios
-    this.initializeTestimonials();
+  ngOnInit() {
+    // Counter animation will be handled by service
   }
 
-  ngOnDestroy() {
-    if (this.flotaSlideInterval) {
-      clearInterval(this.flotaSlideInterval);
-    }
-    if (this.testimonialInterval) {
-      clearInterval(this.testimonialInterval);
-    }
+  ngAfterViewInit() {
+    this.initializeAnimations();
+    this.initializeTestimonials();
+    this.initializeCounters();
   }
 
   initializeAnimations() {
@@ -55,61 +53,14 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
       });
     }, observerOptions);
 
-    // Observar todas las tarjetas de imágenes
-    document.querySelectorAll('.about-image-card[data-aos]').forEach(el => {
-      // Hacer visible inmediatamente
-      el.classList.add('aos-animate');
+    document.querySelectorAll('[data-aos]').forEach(el => {
       observer.observe(el);
     });
-
-    // Asegurar que las tarjetas why-card sean visibles
-    document.querySelectorAll('.why-card[data-aos]').forEach(el => {
-      el.classList.add('aos-animate');
-      (el as HTMLElement).style.opacity = '1';
-      (el as HTMLElement).style.visibility = 'visible';
-      observer.observe(el);
-    });
-
-    // Observar las tarjetas de cursos especiales
-    document.querySelectorAll('.special-course-card[data-aos]').forEach(el => {
-      el.classList.add('aos-animate');
-      (el as HTMLElement).style.opacity = '1';
-      (el as HTMLElement).style.visibility = 'visible';
-      observer.observe(el);
-    });
-  }
-
-  startFlotaAutoSlide() {
-    this.flotaSlideInterval = setInterval(() => {
-      this.nextFlotaSlide();
-    }, 2000); // Cambiar cada 2 segundos
-  }
-
-  nextFlotaSlide() {
-    this.currentFlotaSlide = (this.currentFlotaSlide + 1) % this.flotaSlides;
-  }
-
-  prevFlotaSlide() {
-    this.currentFlotaSlide = (this.currentFlotaSlide - 1 + this.flotaSlides) % this.flotaSlides;
-  }
-
-  goToFlotaSlide(index: number) {
-    this.currentFlotaSlide = index;
-  }
-
-  onImageError(event: Event): void {
-    const img = event.target as HTMLImageElement;
-    if (img) {
-      console.error('Error loading image:', img.src);
-      // No ocultar la imagen en el slider, solo mostrar un mensaje
-      img.style.opacity = '0.5';
-      img.alt = 'Imagen no disponible';
-    }
   }
 
   initializeTestimonials() {
-    const testimonialCards = document.querySelectorAll('.testimonial-modern-card');
-    const testimonialDots = document.querySelectorAll('.dot-modern');
+    const testimonialCards = document.querySelectorAll('.testimonial-card');
+    const testimonialDots = document.querySelectorAll('.dot');
     
     if (testimonialCards.length === 0) return;
 
@@ -117,9 +68,11 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
       testimonialCards.forEach((card, i) => {
         card.classList.toggle('active', i === index);
       });
+      
       testimonialDots.forEach((dot, i) => {
         dot.classList.toggle('active', i === index);
       });
+      
       this.currentTestimonial = index;
     };
 
@@ -129,11 +82,77 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
       showTestimonial(this.currentTestimonial);
     }, 5000);
 
-    // Click on dots
+    // Dot navigation
     testimonialDots.forEach((dot, index) => {
       dot.addEventListener('click', () => {
         showTestimonial(index);
       });
     });
   }
+
+  initializeCounters() {
+    const statsObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting && !entry.target.classList.contains('counted')) {
+          entry.target.classList.add('counted');
+          const statNumber = entry.target.querySelector('.stat-number');
+          if (statNumber) {
+            this.animateCounter(statNumber);
+          }
+        }
+      });
+    }, { threshold: 0.5 });
+
+    document.querySelectorAll('.stat-item').forEach(stat => {
+      statsObserver.observe(stat);
+    });
+  }
+
+  animateCounter(element: Element) {
+    const target = parseInt(element.getAttribute('data-target') || '0');
+    const duration = 2000;
+    const increment = target / (duration / 16);
+    let current = 0;
+    
+    const updateCounter = () => {
+      current += increment;
+      if (current < target) {
+        element.textContent = Math.floor(current).toString();
+        requestAnimationFrame(updateCounter);
+      } else {
+        element.textContent = target.toString();
+      }
+    };
+    
+    updateCounter();
+  }
+
+  // Flota slider methods
+  prevFlotaSlide() {
+    this.currentFlotaSlide = (this.currentFlotaSlide - 1 + this.flotaSlides) % this.flotaSlides;
+  }
+
+  nextFlotaSlide() {
+    this.currentFlotaSlide = (this.currentFlotaSlide + 1) % this.flotaSlides;
+  }
+
+  goToFlotaSlide(index: number) {
+    if (index >= 0 && index < this.flotaSlides) {
+      this.currentFlotaSlide = index;
+    }
+  }
+
+  onImageError(event: Event) {
+    const img = event.target as HTMLImageElement;
+    console.error('Error loading image:', img.src);
+    // Hide the broken image
+    img.style.display = 'none';
+  }
+
+  ngOnDestroy() {
+    if (this.testimonialInterval) {
+      clearInterval(this.testimonialInterval);
+    }
+  }
 }
+
